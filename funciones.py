@@ -77,3 +77,8 @@ def Pascal(n):
     #si no es mayor entero o no es mayor que cero
     else:
         return print("Ingrese un numero entero mayor o igual a cero")
+
+    
+    
+if __name__ == "__main__":
+    print("Módulo funciones como script")
