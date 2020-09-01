@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-import funciones as fnc
+import funciones
 
 n=100
 k=10
