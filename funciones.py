@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 def Factorial( a ):
     # Funcion para calcular el factorial de un entero a dado
     
