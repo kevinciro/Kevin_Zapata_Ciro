@@ -51,6 +51,11 @@ def Pascal(n):
         #primer ciclo para las filas (las n)
         for i in range(0, n+1):
             
+            #se imprime la fila
+            numero = str(i)
+            archivo.write("n = ")
+            archivo.write(numero)
+            
             #se imprimen un numero de espacios que van disminuyendo en cada fila
             #se empieza con n+1 espacios, se van disminuyendo en i cada iteracion
             #no se hace salto de linea
@@ -66,10 +71,7 @@ def Pascal(n):
                 coeficientes = str(Binomial(i,j)).center(6)
                 archivo.write(coeficientes)
             
-            #se imprime la fila y se hace el salto de linea
-            numero = str(i)
-            archivo.write("n = ")
-            archivo.write(numero)
+            #se hace el salto de linea
             archivo.write("\n")
         
         archivo.close()
