@@ -14,4 +14,4 @@ n=100
 prob1=0
 for k in range(31,101):
     prob1 = prob1 + ( funciones.Binomial(n,k)/(2**(n)) )
-print("La probabilidad de obtener mas de 30 caras en 100 intentos es: ", prob1)
+print("La probabilidad de obtener mas de 30 caras en 100 intentos es: %.6f" % prob1)
