@@ -1,0 +1,161 @@
+\documentclass[a4paper, twocolumn, 10pt]{article} %en donde dice 12pt es para cambiar el tamaño de la letra  detodo el documento, solo el numero
+\usepackage[utf8]{inputenc} % para importar algunos paquetes
+\usepackage[left=2.5cm,top=2.5cm,right=2.5cm,bottom=2.5cm]{geometry} %margenes
+\usepackage{fancyhdr}%para los encabezados de pagina
+\usepackage{graphicx}
+
+\headsep = 10pt %distancia entre encabezado y texto
+
+%todo esto es para el encabezado de las paginas 
+\pagestyle{fancy}{ 
+\lhead{Instituto de Física, Universidad de Antioquia}
+\chead{}
+\rhead{\thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+}
+
+\fancypagestyle{plain}{
+\fancyhead[L]{Instituto de Física, Universidad de Antioquia}
+\fancyhead[C]{}
+\fancyhead[R]{\thepage}
+}
+
+
+%opening
+\title{ \textbf{Solución a la tarea 3, Física computacional I} }%title es para poner el titulo y textbf es para poner negrilla
+
+\author{ \textit{Kevin Albeiro Zapata Ciro}} %author es para poner los autores y textit es para poner cursiva, lo demas es para los pies de pagina queno se anidan
+
+\date{} %para poner la fecha, si se deja en blanco no queda nada.
+
+
+\begin{document}
+
+\maketitle
+
+\section{El oscilador armonico}
+
+Se tiene un resorte ideal de longitud natural $l_{0}$ y constante $k$, una masa $m$ es suspendida verticalmente a traves del resorte, lo cual hace que este se estire hasta una nueva posicion de equilibrio $D$ debido al peso $mg$. Todas las variables se pueden ver en la figura \ref{fig:res_ver}.
+
+\begin{figure}[h!]
+  \centering
+    \includegraphics[width=0.4\textwidth]{resorte_vertical.png}
+  \caption{Sistema masa resorte vertical. En $a.$ se toma como origen la longitud $l_{0}$; en $b.$ se toma como origen $l_{0}+D$. Imagen sacada de \cite{Mesa}.}
+  \label{fig:res_ver}
+\end{figure}
+
+En el sistema primado, tomando como origen $O'$ la longitud natural $l_{0}$ (parte $a.$ de la figura \ref{fig:res_ver}) se tiene que si se deforma el resorte hasta una posicion $y'$ se cumple que la energia cinetica y potencial son $T=\frac{1}{2}m\dot{y'}^{2}$ y $U = -\frac{1}{2}ky'^{2}+mgy'$, respectivamente. Usando el lagrangiano $L=T-U$ y la ecuacion de Euler-Lagrange $\frac{d}{dt}(\frac{\partial L}{\partial \dot{y'}}) - \frac{\partial L}{\partial y'}=0$ se tiene la ecuacion de movimiento $m\ddot{y'}=mg-ky'$, la cual tiene como solucion:
+
+\begin{equation}
+y'= A\cos(\omega_{0}+\delta)+D
+\label{posicion mas constante}
+\end{equation}
+
+Donde $\omega_{0}^{2}=\frac{k}{m}$ es conocida como la frecuencia natural de vibracion, $A$ es la amplitud de la vibracion, $\delta$ es un desface y $D$ es la nueva posicion de equilibrio. Esta ecuacion solo se diferencia de un MAS debido al factor $D$, el cual puede ser hallado igualando la fuerza a cero (derivando la energia potencial e igualando a cero, ya que $F=-\nabla U$ y se iguala a cero para hallar los puntos de equilibrio), obteniendo:
+
+\begin{equation}
+D = \frac{mg}{k}
+\label{nueva posicion de equilibrio}
+\end{equation}
+
+Si definimos un nuevo sistema de refencia $O$, en el nuevo punto de equilibrio $D$ y hacemos una deformacion $y$ (parte $b.$ de la figura \ref{fig:res_ver}), obtenemos que $T=\frac{1}{2}m\dot{y}^{2}$ y $U = -\frac{1}{2}k(y+D)^{2}+mgy$ son la energia cinetica y potencial medidas desde este nuevo origen $O$. Usando de nuevo el lagrangiano y la ecuacion de Euler-Lagrange (esta vez derivando con respecto a $y$) se obtiene que la nueva ecuacion de movimiento es $m\ddot{y}=mg-ky-kD$ y usando la ecuacion \ref{nueva posicion de equilibrio} (debido a que esta distancia no cambia) se llega a que $m\ddot{y}=-ky$ cuya solucion es
+
+\begin{equation}
+y= A\cos(\omega_{0}+\delta)
+\label{MAS}
+\end{equation}
+
+Donde se observa los parametros son los mismos que en la ecuacion \ref{posicion mas constante} pero sin el $D$. Esto lo que nos dice es que el punto de equilibrio se deplaza debido a la gravedad y es como si tuvieramos un resorte de longitud natural $l_{0}+D$ en vez de uno de longitud natural $l_{0}$. O en otras palabras se tiene una oscilacion armonica al rededor del punto de equilibrio $l_{0}+D$.
+
+La velocidad se puede hallar derivando $y$ con respecto al tiempo, obteniendo:
+
+\begin{equation}
+\dot{y} = -A\omega_{0}\sin(\omega_{0}t+\delta)
+\label{velocidad MAS}
+\end{equation}
+
+\section{El oscilador armonico amortiguado}
+Para el oscilador amortiguado tendre en cuenta una fuerza de friccion de la forma $\vec{F_{fric}}=-b\vec{v}=-b \dot{\vec{y}}$, obteniendo la ecuacion de movimiento $\ddot{y}= -\omega_{0}^{2}y-\frac{b}{m}y$ cuya solucion general es:
+
+\begin{equation}
+y=Ae^{-\frac{\Gamma}{2}t}e^{\sqrt{(\frac{\Gamma}{2})^{2}-\omega_{0}^{2}}t}+Be^{-\frac{\Gamma}{2}t}e^{-\sqrt{(\frac{\Gamma}{2})^{2}-\omega_{0}^{2}}t}
+\label{solucion general}
+\end{equation}
+
+En el cual solo tendre en cuenta el caso subamortiguado $\frac{\Gamma}{2}<\omega_{0}$, y definiendo:
+
+\begin{equation}
+\sqrt{(\frac{\Gamma}{2})^{2}-\omega_{0}^{2}} = i\sqrt{\omega_{0}^{2}-(\frac{\Gamma}{2})^{2}}=i\omega'
+\label{subamortiguado}
+\end{equation}
+
+Usando la ecuacion \ref{subamortiguado} en la ecuacion \ref{solucion general} se obtiene la solucion:
+
+\begin{equation}
+y=Ce^{-\frac{\Gamma}{2}t}\cos(\omega't+\delta)
+\label{amortiguado}
+\end{equation}
+
+Con parametros $C$ que es la amplitud, $\Gamma$ que es el factor asociado al amortiguamiento, $\omega'$ la nueva frecuencia y $\delta$ que es un desface.
+
+Se puede hallar la velocidad derivando $y$ con respecto al tiempo, obteniendo:
+
+\begin{equation}
+\dot{y}=-C\omega'e^{-\frac{\Gamma}{2}t}\sin(\omega't+\delta)+\frac{\Gamma}{2}y
+\label{velocidad amortiguado}
+\end{equation}
+
+\onecolumn
+
+\section{Resultados computacionales}
+
+Se nos pidio crear graficas de posicion contra tiempo y de espacios de fase de minimo cinco MAS del tipo explicado en la seccion 1 y otros cinco (como minimo) con amortiguamiento como los de la seccion 2. Para los primeros use la ecuacion \ref{MAS} con sus respectivos parametros y obtuve:
+
+\begin{figure}[h!]
+  \centering
+    \includegraphics[width=0.7\textwidth]{punto1a.png}
+  \caption{Posicion vs tiempo para 5 MAS}
+  \label{fig:punto1a}
+\end{figure}
+
+Para los espacios de fase use la ecuacion \ref{MAS} y la ecuacion \ref{velocidad MAS}, obtuve:
+\begin{figure}[h!]
+  \centering
+    \includegraphics[width=0.75\textwidth]{punto1b.png}
+  \caption{Espacio de Fase de 5 MAS}
+  \label{fig:punto1b}
+\end{figure}
+
+Para los segundos use la ecuacion \ref{amortiguado} y obtuve:
+\begin{figure}[h!]
+  \centering
+    \includegraphics[width=0.75\textwidth]{punto2a.png}
+  \caption{Posicion vs tiempo para 5 osciladores subamortiguados}
+  \label{fig:punto2a}
+\end{figure}
+
+Para los espacios de fase de estos use \ref{amortiguado} y \ref{velocidad amortiguado} y obtuve:
+\begin{figure}[h!]
+  \centering
+    \includegraphics[width=0.75\textwidth]{punto2b.png}
+  \caption{Espacio de fase de 5 osciladores subamortiguados}
+  \label{fig:punto2b}
+\end{figure}
+
+\section{Conclusiones}
+En la figura \ref{fig:punto1a} se ven 5 MAS, el primero (en azul) que lo llame base tiene una frecuencia natural de uno, una amplitud de uno y un desface de cero; para los demas fui cambiando estos valores, asi el segundo (en amarillo) tiene el doble de amplitud que la base y los demas parametros iguales; el tercero (en verde) tiene el doble de frecuencia que la base y el resto de parametros iguales; el cuarto (de rojo) tiene un desface de pi con respecto a la base y el resto de parametros iguales; el 5 (de morado) tiene la mitad de la amplitud del llamado base.
+
+En la figura \ref{fig:punto1b} mantuve el mismo codigo de colores que en la figura \ref{fig:punto1a}, pero esta es el espacio de fase, de nuevo el base es el azul; podemos concluir muy claramente que doblar la amplitud (amarillo) dobla tanto las posiciones que avarca como las rapideces a las que puede llegas; doblar la frecuencia (verde) mantiene las posiciones que avarca pero dobla las rapideces; los desfaces (rojo) no ocacionan ningun tipo de cambio a las posiciones ni a las rapideces; y por ultimo disminuir la amplitud (morado) disminuye tanto las posiciones como las rapideces.
+
+En la figura \ref{fig:punto2a} se ven 5 osciladores subamortiguados las refencias de colores las mantuve porque el unico parametro que cambiaba era $\Gamma$ y lo mantuve igual a $0.03$ para todos excepto para el rojo (el desfasado pi) donde lo hice igual a $0.01$, se observa que a menos $\Gamma$ menos se amortigua.
+
+En la figura \ref{fig:punto2b}, se ve que los espacios de fase tienden al punto de equilibrio (que en nuestro caso no es cero sino $D$, aunque en las graficas aparece cero). 
+Y se observa que siguen manteniendo los mismos aspectos de rapideces y velocidades que en la grafica \ref{fig:punto1b}; la unica que cambia es la roja, donde se ve una rotacion de pi en esa espiral. En conclusion los MAS y los osciladores subamortiguados comparten muchas caracteristicas, siendo los primeros un caso de los segundos como se puede ver haciendo $\Gamma$ igual a cero en las ecuaciones.
+
+\begin{thebibliography}{0}
+ \bibitem{Mesa}Guerrero de Mesa, A. (2008). Oscilaciones y ondas. Universidad Nacional de Colombia, Unibiblos.
+
+\end{thebibliography}
+
+
+\end{document}
